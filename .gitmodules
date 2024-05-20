@@ -1,3 +1,4 @@
 [submodule "Projeto/PI4_project"]
 	path = Projeto/PI4_project
 	url = https://github.com/GuilhermeSilva3176/PI4_project.git
+	branch = main
