@@ -12,9 +12,8 @@ const HomeLogged = () => {
     const [smallestExpense, setSmallestExpense] = useState(null);
     const [biggestInvestment, setBiggestInvestment] = useState(null);
     const [smallestInvestment, setSmallestInvestment] = useState(null);
-    
 
-    const [hiddenChart, setHiddenChart] = useState(false)
+    const [hiddenChart, setHiddenChart] = useState(false);
 
     let navigate = useNavigate();
     const goToFinances = () => {
@@ -32,7 +31,7 @@ const HomeLogged = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    console.log('finances ' + response.data);
+                    console.log('finances', response.data);
                     let accExpense = 0;
                     let accIncome = 0;
                     let localBiggestExpense = { name: null, value: Number.MIN_VALUE };
@@ -52,19 +51,23 @@ const HomeLogged = () => {
                         }
                     });
 
+                    console.log('Total Expenses:', accExpense);
+                    console.log('Total Income:', accIncome);
+
                     setSaldoUsado(accExpense);
-                    setSaldoRestante(response.data[0]?.user.income + accIncome - accExpense);
+                    const projectedSaldoRestante = response.data[0]?.user.income + accIncome - accExpense;
+                    setSaldoRestante(projectedSaldoRestante);
                     setBiggestExpense(localBiggestExpense.name);
                     setSmallestExpense(localSmallestExpense.name);
 
-                    if (saldoRestante <= 0 && saldoUsado <= 0) {
-                        console.log('ENTROU NO IF')
-                        setHiddenChart(true)
+                    if (projectedSaldoRestante <= 0 && accExpense <= 0) {
+                        setHiddenChart(true);
+                    } else {
+                        setHiddenChart(false);
                     }
 
-                    console.log('saldo usado ' + accExpense);
-                    console.log('saldo restante ' + (response.data[0].user.income + accIncome - accExpense));
-                    console.log(response.data[0].user.income);
+                    console.log('Projected Saldo Restante:', projectedSaldoRestante);
+                    console.log('User Income:', response.data[0].user.income);
                 }
             })
             .catch((error) => {
@@ -78,7 +81,7 @@ const HomeLogged = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    console.log('investments ' + response.data);
+                    console.log('investments', response.data);
                     let localBiggestInvestment = { name: null, value: Number.MIN_VALUE };
                     let localSmallestInvestment = { name: null, value: Number.MAX_VALUE };
 
@@ -219,4 +222,5 @@ const HomeLogged = () => {
         </div>
     );
 };
+
 export default HomeLogged;
