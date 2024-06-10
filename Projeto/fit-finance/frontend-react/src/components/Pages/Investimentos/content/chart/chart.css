@@ -1,0 +1,16 @@
+.pie {
+    margin: 180px 20px;
+    display: flex;
+}
+
+.pie h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+  
+.apexcharts-legend {
+   display: flex;
+   flex-direction: column;
+}

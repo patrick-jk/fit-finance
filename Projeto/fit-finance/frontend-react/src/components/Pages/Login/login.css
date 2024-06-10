@@ -1,0 +1,94 @@
+@import url(../../../configs/configurationStyle/style.css);
+
+.bodyValue {
+  background: url("../../../../public/images/bglogin.png");
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.float-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 580px;
+  border-radius: 25px;
+  background-image: linear-gradient(180deg, #1e2d52bf 0%, #40579299 100%);
+  padding: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 35px;
+}
+
+.textboxLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.textboxLogin input{
+  border: none;
+  height: 45px;
+  width: 380px;
+  border: #ffffff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  margin-top: -10px;
+  border-radius: 5px;
+}
+
+.textboxLogin p {
+  font-size: 24px;
+}
+
+.register {
+  margin-bottom: 25px;
+  position: relative;
+  top: -10px;
+}
+
+.register p {
+  font-size: 20px;
+}
+
+.register a:visited {
+  color: rgb(214, 1, 214)
+}
+
+.btn-login {
+  background-color: rgb(36, 74, 165) !important;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 6rem;
+}
+ 
+.btn-login:hover {
+  background-color: #003274 !important;
+}

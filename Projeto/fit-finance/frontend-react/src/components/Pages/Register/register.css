@@ -1,0 +1,73 @@
+.bodyValue {
+    background: url("../../../../public/images/bglogin.png");
+    background-size: cover;
+    margin: 0;
+}
+
+.floatregister {
+    border-radius: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 580px;
+    width: auto;
+    background-image: linear-gradient(180deg, #1e2d52bf 0%, #40579299 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.titleRegister{
+    margin-top: 20px;
+}
+
+.row-margin {
+    margin-top: 20px;
+}
+
+.register-box h1 {
+    text-align: center;
+}
+
+.containerCenter {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .floatregister {
+        width: 100%;
+        height: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .btn-register {
+        margin-bottom: 20px;
+    }
+}
+
+.textboxCad input, .btn-register{
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-register{
+    background-color: rgb(29, 86, 198) !important;
+    font-size: 20px;
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-register:hover {
+    background-color: #003274 !important;
+}
+
+.inputRenda{
+    margin-bottom: -15px;
+}

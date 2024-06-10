@@ -1,0 +1,172 @@
+@media (max-width: 991.98px) {
+  #header h3 {
+      font-size: 0;
+      padding: 0;
+      margin: 0;
+  }
+  .navbar {
+      background-color: var(--color-primary);
+  }
+}
+
+@media (max-width: 422px) {
+  #header {
+      margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  #header .nav-link {
+      margin-left: 15px;
+      margin-right: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-md-6, .col-md-5 {
+      margin-bottom: 20px;
+      margin-top: 40px;
+  }
+}
+
+
+
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    text-align: center;
+    --navbar-nav-margin: 0;
+  }
+  
+  #headerChart .nav-link {
+    --nav-link-margin: 360px;
+  }
+}
+
+@media (max-width: 891.98px) {
+  .navbar-nav {
+    text-align: center;
+    --navbar-nav-margin: 0;
+  }
+  
+  #headerChart .nav-link {
+    --nav-link-margin: 270px;
+  }
+}
+
+@media (max-width: 701.98px) {
+  .navbar-nav {
+    text-align: center;
+    --navbar-nav-margin: 0;
+  }
+  
+  #headerChart .nav-link {
+    --nav-link-margin: 210px;
+  }
+}
+
+@media (max-width: 621.98px) {
+  .navbar-nav {
+    text-align: center;
+    --navbar-nav-margin: 0;
+  }
+  
+  #headerChart .nav-link {
+    --nav-link-margin: 150px;
+  }
+}
+
+@media (max-width: 1422px) {
+
+  .contentHomeLogged {
+      flex-direction: column;
+      align-items: center;
+      
+  }
+
+  .rootHomeLogged-div {
+    margin-top: 30px;
+  }
+
+  
+  .contentGrid button {
+      width: 100%;
+  }
+
+  .contentGridSaldo h3, .contentGrid h5 {
+      font-size: 28px;
+  }
+
+  .contentGridSaldo p, .contentGrid p {
+      font-size: 20px;
+  }
+
+  .pie-Saldo, .container-homeLogged {
+      width: 90%;
+  }
+
+  
+
+  .row-HomeLogged {
+      flex-direction: column;
+  }
+
+  .col-HomeLogged-Minus, .col-HomeLogged-Plus {
+      margin: 10px 0;
+  }
+
+  .line-div {
+      border-left: none;
+      border-top: 1px white solid;
+      width: 100%;
+      margin: 20px;
+  }
+
+  .title-div h1 {
+      margin: 0;
+  }
+
+  .pie-Saldo {
+      width: 100% !important;
+      max-width: 400px;
+  }
+}
+
+@media (max-width: 570px) {
+  .title-div h1 {
+      font-size: 24px;
+      --title-size: 15vh;
+  }
+
+  .row-HomeLogged {
+    --margin-top-size: 10px;
+}
+
+  .title-div p {
+      font-size: 16px;
+  }
+
+  .contentGrid button {
+      width: 90%;
+  }
+
+  .contentGridSaldo {
+    --heigh-homeLogSize: 100px;
+  }
+
+  .row-HomeLogged-principal {
+    --heigh-homeLogSize: 100px;
+  }
+
+  .contentGridSaldo h3, .contentGrid h5 {
+      font-size: 16px;
+  }
+
+  .contentGridSaldo p, .contentGrid p {
+      font-size: 14px;
+  }
+
+  .pie-Saldo {
+      width: 100% !important;
+      max-width: 300px;
+  }
+}

@@ -1,0 +1,7 @@
+table {
+    border-collapse: collapse;
+}
+
+.valuesFinance:nth-child(n + 10) {
+    display: none;
+}

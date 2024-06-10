@@ -1,0 +1,51 @@
+#spring.application.name=Fit-Finance
+#spring.datasource.url=jdbc:mysql://localhost:3306/fit_finance?createDatabaseIfNotExist=true
+server:
+  error:
+    include-stacktrace: on_param
+  tomcat:
+    relaxed-query-chars: '|,{,},[,]'
+
+spring:
+  sql:
+    init:
+      mode: always
+  application:
+    name: fit-finance-backend
+  datasource:
+    url: jdbc:h2:mem:fit_finance;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;DATABASE_TO_LOWER=true
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, prometheus
+
+  info:
+    env:
+      enabled: true
+
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
