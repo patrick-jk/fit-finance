@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fitfinance</groupId>
+    <artifactId>fit-finance</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Fit-Finance-Backend</name>
+    <description>Projeto Integrador 4 - Website Fit Finanças</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>parent-project</module>
+        <module>commons-core</module>
+        <module>authentication</module>
+        <module>backend</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source> <!-- depending on your project -->
+                    <target>${java.version}</target> <!-- depending on your project -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

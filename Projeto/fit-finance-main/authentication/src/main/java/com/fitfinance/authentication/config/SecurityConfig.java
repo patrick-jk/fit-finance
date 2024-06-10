@@ -1,0 +1,49 @@
+package com.fitfinance.authentication.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+
+@Configuration(value = "AuthenticationSecurityConfig")
+@RequiredArgsConstructor
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig {
+    private static final String[] WHITE_LIST = {"/v2/api-docs", "/v3/api-docs",
+            "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**", "/configuration/ui",
+            "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html"};
+
+    private final AuthenticationProvider authProvider;
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final LogoutHandler logoutHandler;
+
+    @Bean
+    public SecurityFilterChain authenticationFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers(WHITE_LIST).permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
+                                .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .authenticationProvider(authProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(logout -> logout
+                        .logoutUrl("/api/v1/auth/logout")
+                        .addLogoutHandler(logoutHandler)
+                        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                )
+                .build();
+    }
+}
