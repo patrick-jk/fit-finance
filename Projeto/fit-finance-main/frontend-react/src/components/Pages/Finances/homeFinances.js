@@ -36,10 +36,10 @@ const Finances = () => {
     return (
         <div id="page-content">
             <Header/>
-            <div className="page-content">
-                <div className="container">
+            <div className="container">
                     <h2 className="financesTitle">Suas Finanças</h2>
                 </div>
+            <div className="page-content">
                 <Container handleSeeDetailsClick={handleVerDetalhesClick} financeList={finances}/>
                 <Detalhes onClose={handleFecharDetalhes} show={showDetalhes} financeList={
                     finances?.toSorted((a, b) => a.type === "EXPENSE" ? -1 : 1)

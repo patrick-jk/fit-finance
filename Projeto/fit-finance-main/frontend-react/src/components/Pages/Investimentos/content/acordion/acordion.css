@@ -1,36 +1,32 @@
-.mainContent .content p, .accordion .acLabels {
-  color: black;
+.mainContent .content p,
+.accordion .acLabels {
+  color: rgb(255, 255, 255);
 }
 
 .accordion {
   padding: 0;
   justify-content: center;
-  width: 600px;
-  margin: 14vh 10vh;
-}
-
-.title {
-  border-bottom: white 1px solid;
-  text-align: center;
-  margin: 20px 100px;
+  width: var(--accordion-investimentos-tamanho, 600px);
+  margin-bottom: 0;
+  margin-top: var(--accordion-margin-top, 0);
 }
 
 .val1 {
-  background: #7010ff;
+  background: #00c49a;
 }
 
 .val2 {
-  background: #66DA26;
+  background: #202ef8;
 }
 
 .val3 {
-  background: #54D4ff;
+  background: #3e8bff;
 }
 
 .accordion li {
   list-style: none;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding: 3px;
   border-radius: 8px;
   box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
@@ -46,15 +42,14 @@
   cursor: pointer;
 }
 
-
-.acLabels::before{
-  content: '+';
+.acLabels::before {
+  content: "+";
   margin-right: 10px;
-  font-size: 24px;
+  font-size: var(--accordion-font-size, 24px);
   font-weight: 600;
 }
 
-input[type="radio"]{
+input[type="radio"] {
   display: none;
 }
 
@@ -71,24 +66,25 @@ input[type="radio"]{
 
 .accordion input[type="radio"]:checked + .acLabels + .content {
   max-height: 500px;
-  padding: 10px 10px 10px;
+  padding: 0 0 10px;
 }
 
-
 .accordion input[type="radio"]:checked + .acLabels::before {
-  content: '-';
+  content: "-";
 }
 
 .content .content-footer {
   width: 100%;
   height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
 }
 
 .btnVerDetalhes {
-  background-color: rgb(250, 225, 0);
-  color: black;
-  border-color: rgba(250, 225, 0, 0.562);
+  background-color: rgb(0, 100, 250);
+  color: white;
+  border-color: rgba(0, 100, 250, 0.562);
   border-radius: 4px;
-  position: absolute;
-  right: 10px;
 }

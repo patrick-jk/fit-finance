@@ -28,7 +28,7 @@ function Accordion({handleVerDetalhesClick, investmentList}) {
 
     return (
         <ul className="accordion">
-            <h2 className='title'>Minha Carteira</h2>
+            
             <li className='val1'>
                 <input type="radio" name="accordion" id="acoes" onClick={handleChange}/>
                 <label className="acLabels" htmlFor="acoes">AÇÕES</label>

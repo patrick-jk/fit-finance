@@ -18,7 +18,7 @@ function Detalhes({ onClose, show, investmentsList }) {
       case "FIXED_INCOME":
         return "Renda Fixa";
     }
-  }
+  };
 
   const handleVerComprarClick = () => {
     setShowComprar(true);
@@ -28,8 +28,14 @@ function Detalhes({ onClose, show, investmentsList }) {
     setShowVender(true);
   };
   return (
-    <div className={`detalhes-overlay ${show ? "active" : ""}`} onClick={onClose}>
-      <div className={`detalhes-content ${show ? "active" : ""}`} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={`detalhes-overlay ${show ? "active" : ""}`}
+      onClick={onClose}
+    >
+      <div
+        className={`detalhes-content ${show ? "active" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2 className="detalhesTitle">Detalhes</h2>
         <button onClick={onClose} className="fecharAba"></button>
         <table className="tabela-detalhes">
@@ -42,7 +48,7 @@ function Detalhes({ onClose, show, investmentsList }) {
             </tr>
           </thead>
           <tbody>
-          {investmentsList?.map((item) => (
+            {investmentsList?.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
@@ -53,18 +59,37 @@ function Detalhes({ onClose, show, investmentsList }) {
             ))}
           </tbody>
         </table>
-        <button id="btnAcoesInv" className="btn-vender" onClick={handleVerVenderClick}>Vender</button>
-        <button id="btnAcoesInv" className="btn-comprar" onClick={handleVerComprarClick}>Comprar</button>
+        <div className="btns-detalhesInvestimentos">
+          <button
+            id="btnAcoesInv"
+            className="btn-comprar"
+            onClick={handleVerComprarClick}
+          >
+            Comprar
+          </button>
+          <button
+            id="btnAcoesInv"
+            className="btn-vender"
+            onClick={handleVerVenderClick}
+          >
+            Vender
+          </button>
+        </div>
         {showComprar && <Comprar onClose={() => setShowComprar(false)} />}
-        {showVender && <Vender investmentList={investmentsList} onClose={() => setShowVender(false)} />}
+        {showVender && (
+          <Vender
+            investmentList={investmentsList}
+            onClose={() => setShowVender(false)}
+          />
+        )}
       </div>
     </div>
   );
 }
 Detalhes.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired,
-    investmentsList: PropTypes.array.isRequired,
+  onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  investmentsList: PropTypes.array.isRequired,
 };
- 
+
 export default Detalhes;

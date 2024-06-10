@@ -150,7 +150,7 @@
   text-decoration: none;
   display: block;
   cursor: pointer;
-  transition: 0.9s;
+  transition: 0.3s;
 }
 
 .dropdown-content a:hover {

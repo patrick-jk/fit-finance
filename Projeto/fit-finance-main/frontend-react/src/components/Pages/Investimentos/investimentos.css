@@ -1,26 +1,33 @@
-.mainContent {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
 
-@media (max-width: 768px) {
-  .mainContent {
-    flex-direction: column;
-    align-items: center;
-  }
+.mainContent {
+  margin: 0 var(--margin-mainContent-RL, 100px);
+  border-radius: var(--border-mainContent-investimentos, 8px);
+  background-color: var(--secondary-color);
+  height: var(--mainContent-investimentos-height, 65.5vh);
+  display: flex;
+  flex-direction: var(--valor-flex-direction, 'row');
+  transition: flex-direction 0.3s;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 6px 6px 10px 15px rgba(0, 0, 0, 0.25);
 }
 
 .verticalLine {
-  border-left: 1px solid #ccc;
-  height: 525px;
-  margin-bottom: 200px;
-  margin-top: 20vh;
+  border-left: 2px solid #ffffff;
+  height: 325px;
 }
 
-@media (max-width: 768px) {
-  .verticalLine {
-    display: none;
-  }
+.title-investimentos {
+  border-bottom: white 1px solid;
+  text-align: center;
+  margin-right: var(--titulo-margin-lados, 40%);
+  margin-left: var(--titulo-margin-lados, 40%);
+  margin-top: var(--titulo-margin-topo, 100px);
+  margin-bottom: 20px;
+  transition: margin-top .5s ease;
+  position: static;
+}
+
+.grafico-investimentos {
+  width: var(--grafico-investimentos-tamanho, 600px); 
 }

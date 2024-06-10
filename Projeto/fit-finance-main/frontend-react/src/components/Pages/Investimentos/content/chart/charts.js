@@ -4,7 +4,7 @@ import './chart.css';
 import PropTypes from "prop-types";
 
 const InvestmentChart = ({investmentList}) => {
-    const [hiddenChart, setHiddenChart] = useState(false)
+    const [hiddenChart, setHiddenChart] = useState(false);
 
     const [stocks, setStocks] = useState(0);
     const [fiis, setFiis] = useState(0);
@@ -12,27 +12,29 @@ const InvestmentChart = ({investmentList}) => {
 
     useEffect(() => {
         setStocks(investmentList.filter(investment => investment.type === "STOCK")
-            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0))
+            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
         setFiis(investmentList.filter(investment => investment.type === "FII")
-            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0))
+            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
         setFixedIncome(investmentList.filter(investment => investment.type === "FIXED_INCOME")
-            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0))
+            .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
         if (stocks + fiis + fixedIncome === 0) {
-            setHiddenChart(true)
+            setHiddenChart(true);
         } else {
-            setHiddenChart(false)
+            setHiddenChart(false);
         }
     }, [investmentList]);
 
     const state = {
         series: [stocks, fiis, fixedIncome],
         options: {
-            colors: ['#7010ff', '#66DA26', '#54D4ff'],
-
+            colors: ['#00c49a', '#202ef8', '#3e8bff'],
             chart: {
                 foreColor: '#ffffff',
                 type: 'pie',
                 fontSize: '18px'
+            },
+            stroke: {
+                width: 0 
             },
             labels: ['Ações', 'FIIS', 'Renda Fixa'],
             dataLabels: {
@@ -55,17 +57,19 @@ const InvestmentChart = ({investmentList}) => {
                 }
             }]
         },
-    }
+    };
+
     return (
         <div className="pie">
             {hiddenChart ? <h2>Não há dados para serem exibidos.</h2>
-                : <Chart options={state.options} series={state.series} type="pie" width="680" />
+                : <Chart options={state.options} series={state.series} type="pie" className="grafico-investimentos"/>
             }
         </div>
-    )
-}
+    );
+};
+
 InvestmentChart.propTypes = {
     investmentList: PropTypes.array.isRequired
-}
+};
 
 export default InvestmentChart;
