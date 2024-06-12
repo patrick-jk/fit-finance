@@ -89,8 +89,10 @@
 
 .btns-detalhesInvestimentos {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  margin-top: 20px;
 }
 
 #btnAcoesInv {

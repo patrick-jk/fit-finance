@@ -1,84 +1,84 @@
-@import url(../../../configs/configurationStyle/style.css);
-
 .rootHomeLogged-div {
-    margin-top: 30px;
-    height: 94.5vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 60px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .noDataHome {
-    text-align: center;
+  text-align: center;
 }
-  
+
 .contentHomeLogged {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 98%;
-    flex-wrap: wrap;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 98%;
+  flex-wrap: wrap;
 }
 
 .pie-Saldo {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .line-div {
-    border-left: 1px white solid;
+  border-left: var(--border-line-div-homeLogged, 1px white solid);
+  margin: var(--margin-line-div-homeLogged, 100px) 0;
 }
 
 .title-div h1 {
-    margin: 0 var(--title-size, 20vh);
+  margin: 0 var(--title-size, 20vh);
 }
-  
+
 .row-HomeLogged {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: var(--margin-top-size, 25px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: var(--margin-top-size, 25px);
 }
-  
-.col-HomeLogged-Minus, .col-HomeLogged-Plus {
-    flex: 1;
-    margin: 0;
+
+.col-HomeLogged-Minus,
+.col-HomeLogged-Plus {
+  flex: 1;
+  margin: 0;
 }
 
 .col-HomeLogged-Minus {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .col-HomeLogged-Plus {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .row-HomeLogged-principal {
-    background-image: linear-gradient(180deg, #1E2D52 50%, #1E2D52 75%);
-    height: var(--heigh-homeLogSize, 150px);
-    border-radius: 10px;
+  background-image: linear-gradient(180deg, #1e2d52 50%, #1e2d52 75%);
+  height: var(--heigh-homeLogSize, 150px);
+  border-radius: 10px;
 }
 
 .contentGridSaldo {
-    height: var(--heigh-homeLogSize, 150px);
-    border-radius: 10px;
+  height: var(--heigh-homeLogSize, 150px);
+  border-radius: 10px;
 }
 
 .contentGrid {
-    background-image: linear-gradient(180deg, #1E2D52 50%, #1E2D52 75%);
-    border-radius: 5px;
+  background-image: linear-gradient(180deg, #1e2d52 50%, #1e2d52 75%);
+  border-radius: 5px;
 }
 
 .contentGridSaldo p {
-    margin-top: 0.7rem;
-    margin-bottom: 0.5rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.5rem;
 }
 
 .contentGrid button {
-    margin-bottom: 10px;
-    background-color: rgb(36, 255, 0, 0.4);
-    border: none;
-    border-radius: 7px;
+  margin-bottom: 10px;
+  background-color: rgb(36, 255, 0, 0.4);
+  border: none;
+  border-radius: 7px;
 }

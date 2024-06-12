@@ -25,6 +25,9 @@
   .financesTitle {
     --margin-title-size: 225px;
   }
+  .table-valores td {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 768px) {

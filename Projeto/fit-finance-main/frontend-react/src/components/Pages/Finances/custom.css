@@ -1,18 +1,17 @@
 .page-content {
   background-color: var(--secondary-color);
-  height: 70vh;
+  height: auto;
   box-shadow: 6px 6px 10px 15px rgba(0, 0, 0, 0.25);
-  margin: 0vh 16vh;
+  margin: 2vh 10vh;
   border-radius: 10px;
-  
 }
-
 .financesTitle {
   text-align: center;
   border-bottom: white 1px solid;
   margin-bottom: 20px;
   margin-right: var(--margin-title-size, 450px);
   margin-left: var(--margin-title-size, 450px);
+  margin-top: 45px;
 }
 
 .financesTitle h2 {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import "./HomeLogged.css";
+import "./homeLogged.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { USER_TOKEN_REF, AWS_HTTP_REF } from "../../../constants/constants";
@@ -156,12 +156,12 @@ const HomeLogged = () => {
                             options={state.options}
                             series={state.series}
                             type="pie"
-                            width="100%"
+                            width="80%"
                         />
                     }
                 </div>
 
-                <div className="line-div"></div>
+                <hr className="line-div"></hr>
 
                 <div className="container-homeLogged text-center col-md-5 align-self-center">
                     <div className="row-HomeLogged-principal">

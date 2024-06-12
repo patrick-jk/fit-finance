@@ -19,7 +19,7 @@
 
 @media (max-width: 1200px) {
     .mainContent {
-        --mainContent-investimentos-height: 85.65vh;
+        --mainContent-investimentos-height: auto;
         --valor-flex-direction: column;
         align-items: flex-start;
     }
@@ -51,9 +51,6 @@
 }
 
 @media (max-width: 568px) {
-    .mainContent {
-        --border-mainContent-investimentos: 8px 8px 0 0;
-      }
     .title-investimentos {
         --titulo-margin-lados: 35%;
         font-size: 20px;
