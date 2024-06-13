@@ -1,16 +1,16 @@
-version: '2.7'
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
-    volumes:
-      - fit-finance_data:/var/lib/mysql
-    mem_limit: 512m
+#  mysql:
+#    image: mysql
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - fit-finance_data:/var/lib/mysql
+#    mem_limit: 512m
 
   prometheus:
     image: prom/prometheus:latest
@@ -20,7 +20,6 @@ services:
     command: "--config.file=/etc/prometheus.yml"
     ports:
       - "9090:9090"
-    mem_limit: 128m
 
   fit-finance-backend:
     image: patrickviolin/fit-finance-backend:latest
@@ -28,12 +27,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/fit_finance?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://fit-finance-test.cbow4okwydu6.us-east-1.rds.amazonaws.com:3306/fit_finance?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    mem_limit: 512m
-    depends_on:
-      - mysql
+      SPRING_DATASOURCE_PASSWORD: fit-finance-db
 
 volumes:
   fit-finance_data:

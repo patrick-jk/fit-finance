@@ -26,36 +26,37 @@ function Vender({onClose, investmentList}) {
                         Authorization: `Bearer ${localStorage.getItem(USER_TOKEN_REF)}`
                     }
                 }).then((response) => {
-                    if (response.status === 200) {
+                    if (response.status === 204) {
                         alert('Venda de investimento realizada com sucesso!');
+                        onClose()
                     }
                 }).catch((error) => {
                     console.error('Erro ao vender investimento: ' + error);
                 })
             }
-        }
-
-        const investmentPutRequest = {
-            id: selectedInvestment.id,
-            name: selectedInvestment.name,
-            quantity: quantity,
-            price: unitPrice,
-            type: selectedInvestment.type,
-            start_date: selectedInvestment.start_date,
-            end_date: new Date().toISOString().split('T')[0],
-        }
-
-        axios.put(`${AWS_HTTP_REF}/investments`, investmentPutRequest, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem(USER_TOKEN_REF)}`
+        } else {
+            const investmentPutRequest = {
+                id: selectedInvestment.id,
+                name: selectedInvestment.name,
+                quantity: quantity,
+                price: unitPrice,
+                type: selectedInvestment.type,
+                start_date: selectedInvestment.start_date,
+                end_date: new Date().toISOString().split('T')[0],
             }
-        }).then((response) => {
-            if (response.status === 200) {
-                alert('Venda de investimento realizada com sucesso!');
-            }
-        }).catch((error) => {
-            console.error('Erro ao vender investimento: ' + error);
-        })
+            axios.put(`${AWS_HTTP_REF}/investments`, investmentPutRequest, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(USER_TOKEN_REF)}`
+                }
+            }).then((response) => {
+                if (response.status === 204) {
+                    alert('Venda de investimento realizada com sucesso!');
+                    onClose()
+                }
+            }).catch((error) => {
+                console.error('Erro ao vender investimento: ' + error);
+            })
+        }
     }
 
     const handleQuantityChange = (event) => {
@@ -114,5 +115,5 @@ Vender.propTypes = {
     investmentList: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired
 }
- 
+
 export default Vender;

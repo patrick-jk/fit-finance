@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import "./homeLogged.css";
+import "./HomeLogged.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { USER_TOKEN_REF, AWS_HTTP_REF } from "../../../constants/constants";
@@ -174,6 +174,7 @@ const HomeLogged = () => {
                             <p>
                                 {saldoRestante >= 0 ? "R$ " + saldoRestante : "-R$ " + saldoRestante}
                             </p>
+                            <p style={{fontSize: 12}}>(Salário Base + Rendas - Despesas)</p>
                         </div>
                     </div>
                     <div className="row-HomeLogged">
