@@ -30,8 +30,10 @@ public class FinanceController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<Finance>> findAll() {
-        return ResponseEntity.ok(financeService.getAllFinances());
+    public ResponseEntity<List<FinanceGetResponse>> findAll() {
+        List<Finance> allFinances = financeService.getAllFinances();
+        var financeGetResponses = mapper.toFinanceGetResponses(allFinances);
+        return ResponseEntity.ok(financeGetResponses);
     }
 
     @GetMapping("/{id}")
