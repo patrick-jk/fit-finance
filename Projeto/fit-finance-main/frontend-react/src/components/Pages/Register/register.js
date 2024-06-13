@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './register.css';
 import MinimalHeader from '../../Global/minimalHeader';
-import {Container, Form, Row} from "react-bootstrap";
+import { Container, Form, Row, Modal, Button } from "react-bootstrap";
 import InputComponent from "./components/InputComponent";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {AWS_HTTP_REF} from "../../../constants/constants";
+import { useNavigate } from "react-router-dom";
+import { AWS_HTTP_REF } from "../../../constants/constants";
 
 const Registrar = () => {
     const [name, setName] = useState('');
@@ -15,6 +15,10 @@ const Registrar = () => {
     const [birthdate, setBirthdate] = useState('');
     const [phone, setPhone] = useState('');
     const [income, setIncome] = useState('');
+
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     let navigate = useNavigate();
     const goToLogin = () => {
@@ -38,15 +42,12 @@ const Registrar = () => {
             .then(response => {
                 if (response.status === 201) {
                     localStorage.setItem('user-name', response.data.name)
+                    setShowSuccessModal(true);
                 }
             })
-            .then(() => {
-                alert('Usuário registrado com sucesso!')
-                goToLogin()
-
-            })
             .catch(error => {
-                alert('Erro ao registrar usuário: ' + error)
+                setErrorMessage(error.message || 'Erro desconhecido');
+                setShowErrorModal(true);
             });
     }
 
@@ -124,6 +125,34 @@ const Registrar = () => {
                     </div>
                 </div>
             </Container>
+
+            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="modal-text-black">Sucesso</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-text-black">
+                    Usuário registrado com sucesso!
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => { setShowSuccessModal(false); goToLogin(); }}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="modal-text-black">Erro</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-text-black">
+                    Erro ao registrar usuário: {errorMessage}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowErrorModal(false)}>
+                        Fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

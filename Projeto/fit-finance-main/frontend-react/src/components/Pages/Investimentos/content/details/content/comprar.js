@@ -28,7 +28,6 @@ function Comprar({onClose}) {
             }
         }).then((response) => {
             if (response.status === 201) {
-                alert('Compra realizada com sucesso!');
                 window.location.reload()
             }
         }).catch((error) => {

@@ -16,7 +16,7 @@ function Detalhes({onClose, show, financeList}) {
             name: nome,
             value: valor,
             type: tipo,
-            description: "Description", //Will have utility in the future
+            description: "Description",
             start_date: new Date().toISOString().split('T')[0],
             end_date: new Date().toISOString().split('T')[0]
         }
@@ -43,7 +43,7 @@ function Detalhes({onClose, show, financeList}) {
             name: nome,
             value: valor,
             type: tipo,
-            description: "Description", //Will have utility in the future
+            description: "Description",
             start_date: new Date().toISOString().split('T')[0],
             end_date: new Date().toISOString().split('T')[0]
         }
@@ -59,8 +59,7 @@ function Detalhes({onClose, show, financeList}) {
             .then(response => {
                 if (response.status === 201) {
                     console.log(`Criar novo item com nome: ${nome}, valor: ${valor}, tipo: ${tipo}`);
-                    alert("Item criado com sucesso!")
-                    // window.location.reload()
+                    window.location.reload()
                 }
             })
             .catch(error => {
@@ -76,7 +75,6 @@ function Detalhes({onClose, show, financeList}) {
             }
         }).then(response => {
             if (response.status === 204) {
-                alert("Item excluído com sucesso!")
                 // window.location.reload()
             }
         }).catch(error => {

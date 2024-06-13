@@ -51,6 +51,10 @@
   background-color: #ff9696;
 }
 
+#quantidade, #precoUnitario {
+  color: #000000;
+}
+
 .venderTitle {
   color: black;
   position: absolute;

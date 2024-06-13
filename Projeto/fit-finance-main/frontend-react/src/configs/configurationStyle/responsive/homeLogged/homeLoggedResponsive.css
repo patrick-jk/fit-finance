@@ -8,13 +8,9 @@
     margin-top: 30px;
   }
 
-  .contentGrid button {
-    width: 100%;
-  }
-
   .contentGridSaldo h3,
   .contentGrid h5 {
-    font-size: 28px;
+    font-size: 22px;
   }
 
   .contentGridSaldo p,
@@ -22,9 +18,8 @@
     font-size: 20px;
   }
 
-  .col-HomeLogged-Minus,
-  .col-HomeLogged-Plus {
-    margin: 10px 0;
+  .contentGrid button {
+    --content-grid-button: 80%;
   }
 
   .line-div {
@@ -39,7 +34,24 @@
 
   .pie-Saldo {
     width: 100% !important;
-    max-width: 400px;
+    max-width: 600px;
+  }
+
+  .col-HomeLogged-Minus,
+  .col-HomeLogged-Plus {
+    width: 300px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .contentGridSaldo h3,
+  .contentGrid h5 {
+    font-size: 16px;
+  }
+
+  .col-HomeLogged-Minus,
+  .col-HomeLogged-Plus {
+    width: 200px;
   }
 }
 
@@ -72,16 +84,16 @@
 
   .contentGridSaldo h3,
   .contentGrid h5 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .contentGridSaldo p,
   .contentGrid p {
     font-size: 14px;
   }
-
+  
   .pie-Saldo {
     width: 100% !important;
-    max-width: 300px;
+    max-width: 400px;
   }
 }

@@ -12,7 +12,6 @@ const HomeLogged = () => {
     const [smallestExpense, setSmallestExpense] = useState(null);
     const [biggestInvestment, setBiggestInvestment] = useState(null);
     const [smallestInvestment, setSmallestInvestment] = useState(null);
-
     const [hiddenChart, setHiddenChart] = useState(false);
 
     let navigate = useNavigate();
@@ -29,89 +28,89 @@ const HomeLogged = () => {
                 Authorization: `Bearer ${localStorage.getItem(USER_TOKEN_REF)}`,
             },
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    console.log('finances', response.data);
-                    let accExpense = 0;
-                    let accIncome = 0;
-                    let localBiggestExpense = { name: null, value: Number.MIN_VALUE };
-                    let localSmallestExpense = { name: null, value: Number.MAX_VALUE };
+        .then((response) => {
+            if (response.status === 200) {
+                console.log('finances', response.data);
+                let accExpense = 0;
+                let accIncome = 0;
+                let localBiggestExpense = { name: null, value: Number.MIN_VALUE };
+                let localSmallestExpense = { name: null, value: Number.MAX_VALUE };
 
-                    response.data.forEach((finance) => {
-                        if (finance.type === 'EXPENSE') {
-                            accExpense += finance.value;
-                            if (finance.value > localBiggestExpense.value) {
-                                localBiggestExpense = { name: finance.name, value: finance.value };
-                            }
-                            if (finance.value < localSmallestExpense.value) {
-                                localSmallestExpense = { name: finance.name, value: finance.value };
-                            }
-                        } else {
-                            accIncome += finance.value;
+                response.data.forEach((finance) => {
+                    if (finance.type === 'EXPENSE') {
+                        accExpense += finance.value;
+                        if (finance.value > localBiggestExpense.value) {
+                            localBiggestExpense = { name: finance.name, value: finance.value };
                         }
-                    });
-
-                    console.log('Total Expenses:', accExpense);
-                    console.log('Total Income:', accIncome);
-
-                    setSaldoUsado(accExpense);
-                    const projectedSaldoRestante = response.data[0]?.user.income + accIncome - accExpense;
-                    setSaldoRestante(projectedSaldoRestante);
-                    setBiggestExpense(localBiggestExpense.name);
-                    setSmallestExpense(localSmallestExpense.name);
-
-                    if (projectedSaldoRestante <= 0 && accExpense <= 0) {
-                        setHiddenChart(true);
+                        if (finance.value < localSmallestExpense.value) {
+                            localSmallestExpense = { name: finance.name, value: finance.value };
+                        }
                     } else {
-                        setHiddenChart(false);
+                        accIncome += finance.value;
                     }
+                });
 
-                    console.log('Projected Saldo Restante:', projectedSaldoRestante);
-                    console.log('User Income:', response.data[0].user.income);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                console.log('Total Expenses:', accExpense);
+                console.log('Total Income:', accIncome);
+
+                setSaldoUsado(accExpense);
+                const userIncome = response.data[0]?.user.income || 0;
+                const projectedSaldoRestante = userIncome + accIncome - accExpense;
+                setSaldoRestante(projectedSaldoRestante);
+                setBiggestExpense(localBiggestExpense.name);
+                setSmallestExpense(localSmallestExpense.name);
+
+                setHiddenChart(projectedSaldoRestante <= 0 && accExpense <= 0);
+                
+                console.log('Projected Saldo Restante:', projectedSaldoRestante);
+                console.log('User Income:', userIncome);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 
         axios.get(`${AWS_HTTP_REF}/investments/by-user-id`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(USER_TOKEN_REF)}`,
             },
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    console.log('investments', response.data);
-                    let localBiggestInvestment = { name: null, value: Number.MIN_VALUE };
-                    let localSmallestInvestment = { name: null, value: Number.MAX_VALUE };
+        .then((response) => {
+            if (response.status === 200) {
+                console.log('investments', response.data);
+                let localBiggestInvestment = { name: null, value: Number.MIN_VALUE };
+                let localSmallestInvestment = { name: null, value: Number.MAX_VALUE };
 
-                    response.data.forEach((investment) => {
-                        const investmentValue = investment.price * investment.quantity;
-                        if (investmentValue > localBiggestInvestment.value) {
-                            localBiggestInvestment = { name: investment.name, value: investmentValue };
-                        }
-                        if (investmentValue < localSmallestInvestment.value) {
-                            localSmallestInvestment = { name: investment.name, value: investmentValue };
-                        }
-                    });
+                response.data.forEach((investment) => {
+                    const investmentValue = investment.price * investment.quantity;
+                    if (investmentValue > localBiggestInvestment.value) {
+                        localBiggestInvestment = { name: investment.name, value: investmentValue };
+                    }
+                    if (investmentValue < localSmallestInvestment.value) {
+                        localSmallestInvestment = { name: investment.name, value: investmentValue };
+                    }
+                });
 
-                    setBiggestInvestment(localBiggestInvestment.name);
-                    setSmallestInvestment(localSmallestInvestment.name);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                setBiggestInvestment(localBiggestInvestment.name);
+                setSmallestInvestment(localSmallestInvestment.name);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     const state = {
         series: [saldoUsado, saldoRestante],
         options: {
-            colors: ["#700000", "#19a2fd"],
+            colors: ["#00c49a", "#19a2fd"],
             chart: {
                 foreColor: "#ffffff",
                 type: "pie",
                 fontSize: "18px",
+            },
+            stroke: {
+                width: 0 
             },
             labels: ["Saldo Usado", "Saldo Restante"],
             dataLabels: {
@@ -153,10 +152,10 @@ const HomeLogged = () => {
                 <div className="pie-Saldo col-md-5 align-self-center">
                     {hiddenChart ? <h2 className="noDataHome">Não há dados.</h2> :
                         <Chart
+                            className="chart-HomeLogged"
                             options={state.options}
                             series={state.series}
                             type="pie"
-                            width="80%"
                         />
                     }
                 </div>
@@ -182,8 +181,8 @@ const HomeLogged = () => {
                             <div className="contentGrid">
                                 <h5>Maior Despesa</h5>
                                 <p>{biggestExpense}</p>
-                                <button onClick={goToFinances}>
-                                    Acessar Finanças
+                                <button className="btn-homeLogged-values" onClick={goToFinances}>
+                                    Finanças
                                 </button>
                             </div>
                         </div>
@@ -191,8 +190,8 @@ const HomeLogged = () => {
                             <div className="contentGrid">
                                 <h5>Menor Despesa</h5>
                                 <p>{smallestExpense}</p>
-                                <button onClick={goToFinances}>
-                                    Acessar Finanças
+                                <button className="btn-homeLogged-values" onClick={goToFinances}>
+                                    Finanças
                                 </button>
                             </div>
                         </div>
@@ -202,8 +201,8 @@ const HomeLogged = () => {
                             <div className="contentGrid">
                                 <h5>Maior Investimento</h5>
                                 <p>{biggestInvestment}</p>
-                                <button onClick={goToInvestments}>
-                                    Acessar Investimentos
+                                <button className="btn-homeLogged-values" onClick={goToInvestments}>
+                                    Investimentos
                                 </button>
                             </div>
                         </div>
@@ -211,8 +210,8 @@ const HomeLogged = () => {
                             <div className="contentGrid">
                                 <h5>Menor Investimento</h5>
                                 <p>{smallestInvestment}</p>
-                                <button onClick={goToInvestments}>
-                                    Acessar Investimentos
+                                <button className="btn-homeLogged-values" onClick={goToInvestments}>
+                                    Investimentos
                                 </button>
                             </div>
                         </div>
