@@ -42,8 +42,6 @@ public class User implements UserDetails {
     private String roles;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
-    @OneToMany(mappedBy = "user")
-    private List<Finance> finances;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -19,8 +19,10 @@ const FinanceListAll = () => {
             }
         })
             .then((response) => {
-                setFinances(response.data);
-                console.log(response.data)
+                if (response.status === 200) {
+                    setFinances(response.data);
+                    console.log(response.data)
+                }
             })
             .catch(error => {
                 alert('Você não tem permissão para acessar essa página.');
@@ -45,7 +47,7 @@ const FinanceListAll = () => {
                         </thead>
                         <tbody>
                         {
-                            finances?.filter((finance) => finance.name.toLowerCase().includes(search.toLowerCase())).map((finance) => {
+                            finances.filter((finance) => finance.name.toLowerCase().includes(search.toLowerCase())).map((finance) => {
                                 return (
                                     <tr key={finance.id}>
                                         <td>{finance.id}</td>

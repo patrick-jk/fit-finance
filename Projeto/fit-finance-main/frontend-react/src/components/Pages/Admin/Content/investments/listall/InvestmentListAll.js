@@ -54,7 +54,7 @@ const InvestmentListAll = () => {
                         </thead>
                         <tbody>
                         {
-                            investments?.filter((investment) => investment.name.toLowerCase().includes(search.toLowerCase())).map((investment) => {
+                            investments.filter((investment) => investment.name.toLowerCase().includes(search.toLowerCase())).map((investment) => {
                                 return (
                                     <tr key={investment.id}>
                                         <td>{investment.id}</td>
