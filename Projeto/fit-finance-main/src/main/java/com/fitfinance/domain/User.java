@@ -2,13 +2,10 @@ package com.fitfinance.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @With
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class User implements UserDetails {
     @EqualsAndHashCode.Include
     @Id
@@ -41,6 +41,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String roles;
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Token> tokens;
 
     @Override
@@ -75,3 +76,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+

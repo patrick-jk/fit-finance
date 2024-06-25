@@ -10,9 +10,9 @@ function Accordion({handleVerDetalhesClick, investmentList}) {
     const [fixedIncome, setFixedIncome] = useState([]);
 
     useEffect(() => {
-        setStocks(investmentList.filter(investment => investment.type === "STOCK"))
-        setFiis(investmentList.filter(investment => investment.type === "FII"))
-        setFixedIncome(investmentList.filter(investment => investment.type === "FIXED_INCOME"))
+        setStocks(investmentList.filter(investment => investment.type === "Ações"))
+        setFiis(investmentList.filter(investment => investment.type === "FIIs"))
+        setFixedIncome(investmentList.filter(investment => investment.type === "Renda Fixa"))
     }, [investmentList]);
 
 

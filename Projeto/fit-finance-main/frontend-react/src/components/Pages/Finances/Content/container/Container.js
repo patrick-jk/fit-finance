@@ -9,7 +9,7 @@ function Container({handleSeeDetailsClick, financeList}) {
             <div className="row justify-content-between">
                 <div className="col-md-5">
                     <FinanceTable tableName={"Despesas"} financeListFiltered={
-                        financeList && financeList.filter((finance) => finance.type === "EXPENSE")
+                        financeList && financeList.filter((finance) => finance.type === "Despesa")
                     }/>
                 </div>
                 <div className="col-md-2 d-flex justify-content-center">
@@ -17,7 +17,7 @@ function Container({handleSeeDetailsClick, financeList}) {
                 </div>
                 <div className="col-md-5">
                     <FinanceTable tableName={"Renda"} financeListFiltered={
-                        financeList && financeList.filter((finance) => finance.type === "INCOME")
+                        financeList && financeList.filter((finance) => finance.type === "Renda")
                     }/>
                 </div>
             </div>

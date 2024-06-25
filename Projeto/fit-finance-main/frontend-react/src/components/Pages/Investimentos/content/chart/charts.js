@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
-import './chart.css';
+import axios from 'axios';
+import { AWS_HTTP_REF, USER_TOKEN_REF } from '../../../../../constants/constants';
 import PropTypes from "prop-types";
 
 const InvestmentChart = ({investmentList}) => {
@@ -11,11 +12,11 @@ const InvestmentChart = ({investmentList}) => {
     const [fixedIncome, setFixedIncome] = useState(0);
 
     useEffect(() => {
-        setStocks(investmentList.filter(investment => investment.type === "STOCK")
+        setStocks(investmentList.filter(investment => investment.type === "Ações")
             .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
-        setFiis(investmentList.filter(investment => investment.type === "FII")
+        setFiis(investmentList.filter(investment => investment.type === "FIIs")
             .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
-        setFixedIncome(investmentList.filter(investment => investment.type === "FIXED_INCOME")
+        setFixedIncome(investmentList.filter(investment => investment.type === "Renda Fixa")
             .reduce((acc, investment) => acc + (investment.price * investment.quantity), 0));
         if (stocks + fiis + fixedIncome === 0) {
             setHiddenChart(true);
@@ -34,7 +35,7 @@ const InvestmentChart = ({investmentList}) => {
                 fontSize: '18px'
             },
             stroke: {
-                width: 0 
+                width: 0
             },
             labels: ['Ações', 'FIIS', 'Renda Fixa'],
             dataLabels: {

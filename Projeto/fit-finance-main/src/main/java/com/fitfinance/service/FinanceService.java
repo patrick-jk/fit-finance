@@ -1,19 +1,24 @@
 package com.fitfinance.service;
 
 import com.fitfinance.domain.Finance;
+import com.fitfinance.domain.HomeSummary;
 import com.fitfinance.domain.User;
 import com.fitfinance.exception.NotFoundException;
 import com.fitfinance.repository.FinanceRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class FinanceService {
     private final FinanceRepository financeRepository;
+    private final InvestmentService investmentService;
 
     public List<Finance> getAllFinances() {
         return financeRepository.findAll();
@@ -33,6 +38,28 @@ public class FinanceService {
 
     public Finance getSmallestExpense(Long userId) {
         return financeRepository.getSmallestExpenseByUserId(userId).orElseThrow(() -> new NotFoundException("Smallest expense not found"));
+    }
+
+    private BigDecimal getTotalExpenses(Long userId) {
+        return financeRepository.getExpensesTotalByUserId(userId);
+    }
+
+    public HomeSummary getFinanceBalance(Long userId) {
+        var balance = financeRepository.findBalanceByUserId(userId);
+        var totalExpenses = getTotalExpenses(userId);
+        var biggestExpense = getBiggestExpense(userId);
+        var smallestExpense = getSmallestExpense(userId);
+        var biggestInvestment = investmentService.getBiggestInvestment(userId);
+        var smallestInvestment = investmentService.getSmallestInvestment(userId);
+
+        return HomeSummary.builder()
+                .balance(balance)
+                .totalExpenses(totalExpenses)
+                .biggestExpense(biggestExpense)
+                .smallestExpense(smallestExpense)
+                .biggestInvestment(biggestInvestment)
+                .smallestInvestment(smallestInvestment)
+                .build();
     }
 
     @Transactional

@@ -5,6 +5,7 @@ import Container from "./Content/container/Container";
 import './style.css';
 import axios from "axios";
 import {USER_TOKEN_REF, AWS_HTTP_REF} from "../../../constants/constants";
+import login from "../Login/login";
 
 const Finances = () => {
     const [showDetalhes, setShowDetalhes] = useState(false);
@@ -22,7 +23,7 @@ const Finances = () => {
         }).catch((error) => {
             console.log('Erro ao buscar finanças ' + error)
         })
-    });
+    }, []);
 
     const handleVerDetalhesClick = () => {
         setShowDetalhes(true);
@@ -41,9 +42,7 @@ const Finances = () => {
                 </div>
             <div className="page-content">
                 <Container handleSeeDetailsClick={handleVerDetalhesClick} financeList={finances}/>
-                <Detalhes onClose={handleFecharDetalhes} show={showDetalhes} financeList={
-                    finances?.toSorted((a, b) => a.type === "EXPENSE" ? -1 : 1)
-                }/>
+                <Detalhes onClose={handleFecharDetalhes} show={showDetalhes} financeList={finances}/>
             </div>
         </div>
     );

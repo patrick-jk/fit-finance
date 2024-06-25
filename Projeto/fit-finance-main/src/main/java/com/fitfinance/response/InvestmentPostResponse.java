@@ -23,7 +23,7 @@ public class InvestmentPostResponse {
     @Schema(description = "Investment's price", example = "1000.00")
     private Double price;
     @Schema(description = "Investment's type", example = "STOCKS")
-    private InvestmentType type;
+    private String type;
     @Schema(description = "Investment's start date", example = "2021-01-01")
     @JsonProperty("start_date")
     private LocalDate startDate;

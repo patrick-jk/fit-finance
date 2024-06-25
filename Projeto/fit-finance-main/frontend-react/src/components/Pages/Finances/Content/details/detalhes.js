@@ -107,7 +107,7 @@ function Detalhes({onClose, show, financeList}) {
                         {financeList?.map((finance) => (
                             <tr key={finance.id}>
                                 <td>{finance.name}</td>
-                                <td>{finance.type  === 'EXPENSE' ? 'Despesa' : 'Renda'}</td>
+                                <td>{finance.type}</td>
                                 <td>{finance.value}</td>
                                 <td>
                                     <div className="dropdown">

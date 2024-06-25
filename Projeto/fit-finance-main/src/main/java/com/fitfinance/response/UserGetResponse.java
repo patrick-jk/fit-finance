@@ -26,5 +26,6 @@ public class UserGetResponse {
     @JsonIgnore
     private String birthdate;
     @Schema(description = "User's income", example = "1500.00")
+    @JsonIgnore
     private double income;
 }

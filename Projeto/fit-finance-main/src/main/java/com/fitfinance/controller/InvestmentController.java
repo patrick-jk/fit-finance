@@ -3,10 +3,12 @@ package com.fitfinance.controller;
 import com.fitfinance.domain.Investment;
 import com.fitfinance.domain.User;
 import com.fitfinance.mapper.InvestmentMapper;
+import com.fitfinance.mapper.InvestmentSummaryMapper;
 import com.fitfinance.request.InvestmentPostRequest;
 import com.fitfinance.request.InvestmentPutRequest;
 import com.fitfinance.response.InvestmentGetResponse;
 import com.fitfinance.response.InvestmentPostResponse;
+import com.fitfinance.response.InvestmentSummaryResponse;
 import com.fitfinance.service.InvestmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ import java.util.List;
 public class InvestmentController {
     private final InvestmentService investmentService;
     private final InvestmentMapper mapper;
+    private final InvestmentSummaryMapper investmentSummaryMapper;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -67,6 +70,14 @@ public class InvestmentController {
         var investmentFound = investmentService.getSmallestInvestment(user.getId());
         var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
         return ResponseEntity.ok(investmentResponse);
+    }
+
+    @GetMapping("/total-summary")
+    public ResponseEntity<InvestmentSummaryResponse> getInvestmentSummary() {
+        var user = getUser();
+        var investmentSummary = investmentService.getInvestmentSummary(user.getId());
+        var investmentSummaryResponse = investmentSummaryMapper.toInvestmentSummaryResponse(investmentSummary);
+        return ResponseEntity.ok(investmentSummaryResponse);
     }
 
     @PostMapping

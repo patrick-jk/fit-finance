@@ -3,10 +3,12 @@ package com.fitfinance.controller;
 import com.fitfinance.domain.Finance;
 import com.fitfinance.domain.User;
 import com.fitfinance.mapper.FinanceMapper;
+import com.fitfinance.mapper.HomeSummaryMapper;
 import com.fitfinance.request.FinancePostRequest;
 import com.fitfinance.request.FinancePutRequest;
 import com.fitfinance.response.FinanceGetResponse;
 import com.fitfinance.response.FinancePostResponse;
+import com.fitfinance.response.HomeSummaryResponse;
 import com.fitfinance.service.FinanceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +22,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Log4j2
 @RestController
 @RequestMapping("api/v1/finances")
 @RequiredArgsConstructor
 public class FinanceController {
     private final FinanceService financeService;
     private final FinanceMapper mapper;
+    private final HomeSummaryMapper homeSummaryMapper;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -65,6 +69,16 @@ public class FinanceController {
         var financeFound = financeService.getSmallestExpense(user.getId());
         var financeGetResponse = mapper.toFinanceGetResponse(financeFound);
         return ResponseEntity.ok(financeGetResponse);
+    }
+
+    @GetMapping("/user-summary")
+    public ResponseEntity<HomeSummaryResponse> getFinanceBalance() {
+        var user = getUser();
+        var homeSummary = financeService.getFinanceBalance(user.getId());
+        log.info("Home summary: {}", homeSummary);
+        var response = homeSummaryMapper.toHomeSummaryResponse(homeSummary);
+        log.info("Home summary response: {}", response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping

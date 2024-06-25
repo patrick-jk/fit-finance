@@ -1,6 +1,8 @@
 package com.fitfinance.service;
 
 import com.fitfinance.domain.Investment;
+import com.fitfinance.domain.InvestmentSummary;
+import com.fitfinance.domain.InvestmentType;
 import com.fitfinance.domain.User;
 import com.fitfinance.exception.NotFoundException;
 import com.fitfinance.repository.InvestmentRepository;
@@ -33,6 +35,18 @@ public class InvestmentService {
 
     public Investment getSmallestInvestment(Long userId) {
         return investmentRepository.getSmallestInvestmentByUserId(userId).orElseThrow(() -> new NotFoundException("Smallest investment not found"));
+    }
+
+    public InvestmentSummary getInvestmentSummary(Long userId) {
+        var totalStocks = investmentRepository.getTotalInvestmentByType(userId, InvestmentType.STOCK);
+        var totalFIIs = investmentRepository.getTotalInvestmentByType(userId, InvestmentType.FII);
+        var totalFixedIncome = investmentRepository.getTotalInvestmentByType(userId, InvestmentType.FIXED_INCOME);
+
+        return InvestmentSummary.builder()
+                .totalStocks(totalStocks)
+                .totalFIIs(totalFIIs)
+                .totalFixedIncome(totalFixedIncome)
+                .build();
     }
 
     @Transactional

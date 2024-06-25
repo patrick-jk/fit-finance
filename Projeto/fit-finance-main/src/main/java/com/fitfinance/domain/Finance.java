@@ -6,10 +6,13 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @Builder
-@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Finance {
     @EqualsAndHashCode.Include
     @Id
@@ -29,6 +32,7 @@ public class Finance {
     @Column(nullable = false)
     private LocalDate endDate;
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     @JoinColumn(name = "user_id")
     private User user;
 }

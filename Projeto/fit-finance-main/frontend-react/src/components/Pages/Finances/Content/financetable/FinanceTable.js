@@ -23,7 +23,7 @@ const FinanceTable = ({tableName, financeListFiltered}) => {
                             <tr className="valuesFinance" key={finance.id}>
                                 <td>{finance.name}</td>
                                 <td>{finance.value}</td>
-                                <td>{finance.type === 'EXPENSE' ? "Despesa" : "Renda"}</td>
+                                <td>{finance.type}</td>
                             </tr>
                         ))}
                         </tbody>

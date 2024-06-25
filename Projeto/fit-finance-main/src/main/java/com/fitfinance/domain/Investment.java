@@ -2,12 +2,17 @@ package com.fitfinance.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Investment {
@@ -30,5 +35,6 @@ public class Investment {
     private LocalDate endDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
 }

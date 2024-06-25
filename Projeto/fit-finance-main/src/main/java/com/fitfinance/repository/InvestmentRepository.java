@@ -7,6 +7,7 @@ import com.fitfinance.domain.InvestmentType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,7 @@ public interface InvestmentRepository extends JpaRepository<Investment, Long> {
     Optional<Investment> getBiggestInvestmentByUserId(Long userId);
     @Query("SELECT i FROM Investment i WHERE i.user.id = :userId ORDER BY i.price * i.quantity ASC LIMIT 1")
     Optional<Investment> getSmallestInvestmentByUserId(Long userId);
+
+    @Query("SELECT COALESCE(SUM(i.price * i.quantity), 0) FROM Investment i WHERE i.user.id = :userId AND i.type = :type")
+    BigDecimal getTotalInvestmentByType(Long userId, InvestmentType type);
 }

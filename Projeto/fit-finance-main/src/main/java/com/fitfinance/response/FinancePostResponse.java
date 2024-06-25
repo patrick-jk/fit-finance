@@ -23,7 +23,7 @@ public class FinancePostResponse {
     @Schema(description = "Finance's value", example = "1000.00")
     private double value;
     @Schema(description = "Finance's type", example = "INCOME")
-    private FinanceType type;
+    private String type;
     @Schema(description = "Finance's start date", example = "2021-01-01")
     @JsonProperty("start_date")
     private LocalDate startDate;
