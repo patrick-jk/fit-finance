@@ -1,5 +1,7 @@
-package com.fitfinance.domain;
+package com.fitfinance.response.model;
 
+import com.fitfinance.domain.Finance;
+import com.fitfinance.domain.Investment;
 import lombok.*;
 
 import java.math.BigDecimal;

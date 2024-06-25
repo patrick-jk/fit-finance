@@ -25,7 +25,7 @@ function Investimentos() {
       .catch((error) => {
         alert("Erro ao buscar investimentos " + error);
       });
-  });
+  }, []);
 
   const handleVerDetalhesClick = () => {
     setShowDetalhes(true);

@@ -1,6 +1,6 @@
 package com.fitfinance.mapper;
 
-import com.fitfinance.domain.HomeSummary;
+import com.fitfinance.response.model.HomeSummary;
 import com.fitfinance.response.HomeSummaryResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

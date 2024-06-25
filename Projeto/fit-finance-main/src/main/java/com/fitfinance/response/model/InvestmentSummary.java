@@ -1,4 +1,4 @@
-package com.fitfinance.domain;
+package com.fitfinance.response.model;
 
 import lombok.*;
 

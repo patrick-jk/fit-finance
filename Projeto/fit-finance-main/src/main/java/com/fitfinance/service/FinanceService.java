@@ -1,7 +1,7 @@
 package com.fitfinance.service;
 
 import com.fitfinance.domain.Finance;
-import com.fitfinance.domain.HomeSummary;
+import com.fitfinance.response.model.HomeSummary;
 import com.fitfinance.domain.User;
 import com.fitfinance.exception.NotFoundException;
 import com.fitfinance.repository.FinanceRepository;
