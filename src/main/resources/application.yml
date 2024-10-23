@@ -1,5 +1,3 @@
-#spring.application.name=Fit-Finance
-#spring.datasource.url=jdbc:mysql://localhost:3306/fit_finance?createDatabaseIfNotExist=true
 server:
   error:
     include-stacktrace: on_param
@@ -13,12 +11,15 @@ spring:
   application:
     name: fit-finance-backend
   datasource:
-    url: jdbc:mysql://www.thyagoquintas.com.br:3306/engenharia_11
-    username: engenharia_11
-    password: cachalote
+    url: jdbc:mysql://localhost:3306/fit-finance?createDatabaseIfNotExist=true
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
+  threads:
+    virtual:
+      enabled: true
 
 logging:
   level:
