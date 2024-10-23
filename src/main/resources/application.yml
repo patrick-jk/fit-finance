@@ -11,7 +11,7 @@ spring:
   application:
     name: fit-finance-backend
   datasource:
-    url: jdbc:mysql://localhost:3306/fit-finance?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/fit_finance?createDatabaseIfNotExist=true
     username: root
     password: root
   jpa:
