@@ -1,0 +1,1 @@
+INSERT INTO fit_finance.user (name, cpf, phone, roles, income, email, password, birthdate) VALUES ('Lucas', '11122233344', '11912345678', 'USER', 1000,  'lucas@fitfinance.com', '{bcrypt}$2a$10$.qnLVCIoZo5S7LGNUemz..uNuO45ktqKYUXG0N86Cl1mHqr184zay', '1990-01-01');

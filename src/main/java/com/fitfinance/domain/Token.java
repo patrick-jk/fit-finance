@@ -15,7 +15,7 @@ public class Token {
 
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, name = "token")

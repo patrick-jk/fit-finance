@@ -8,10 +8,11 @@ import com.fitfinance.mapper.UserMapper;
 import com.fitfinance.repository.FinanceRepository;
 import com.fitfinance.repository.TokenRepository;
 import com.fitfinance.repository.UserRepository;
-import com.fitfinance.response.*;
+import com.fitfinance.response.FinanceGetResponse;
+import com.fitfinance.response.FinancePostResponse;
+import com.fitfinance.response.UserGetResponse;
 import com.fitfinance.service.JwtService;
 import com.fitfinance.util.FinanceUtils;
-import com.fitfinance.util.TestUtils;
 import com.fitfinance.util.TokenUtils;
 import com.fitfinance.util.UserUtils;
 import lombok.extern.log4j.Log4j2;
@@ -25,9 +26,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

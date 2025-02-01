@@ -18,19 +18,8 @@ public class RestAssuredConfig {
     @Bean(name = "requestSpecificationRegularUser")
     public RequestSpecification requestSpecificationRegularUser() {
         return RestAssured.given()
-                .baseUri(BASE_URI + port)
-                .body("""
-                        {
-                            "name": "John Doe",
-                            "cpf": "123.456.789-00",
-                            "email": "john_doe@gmail.com",
-                            "password": "123456789",
-                            "phone": "+55 11 91234-5678",
-                            "birthdate": "1990-01-01",
-                            "income": 3500,
-                            "roles": "USER"
-                        }
-                        """);
+                .baseUri(BASE_URI + port);
+//                .auth().oauth2();
     }
 
     @Bean(name = "requestSpecificationAdminUser")

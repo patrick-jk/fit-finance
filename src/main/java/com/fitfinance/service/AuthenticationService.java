@@ -3,15 +3,11 @@ package com.fitfinance.service;
 import com.fitfinance.domain.Token;
 import com.fitfinance.domain.TokenType;
 import com.fitfinance.domain.User;
-import com.fitfinance.mapper.UserMapper;
 import com.fitfinance.repository.TokenRepository;
 import com.fitfinance.repository.UserRepository;
 import com.fitfinance.request.AuthenticationRequest;
-import com.fitfinance.request.RegisterRequest;
-import com.fitfinance.request.UserPostRequest;
 import com.fitfinance.response.AuthenticationResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
@@ -26,27 +22,8 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
-    private final UserMapper mapper;
     private final JwtService jwtService;
-    private final UserService userService;
     private final AuthenticationManager authenticationManager;
-
-    @Transactional
-    public User register(RegisterRequest request) {
-        var userPostRequest = UserPostRequest.builder()
-                .name(request.getName())
-                .cpf(request.getCpf())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .phone(request.getPhone())
-                .birthdate(request.getBirthdate())
-                .income(request.getIncome())
-                .build();
-
-        var user = mapper.toUser(userPostRequest);
-
-        return userService.createUser(user);
-    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -102,8 +79,7 @@ public class AuthenticationService {
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
-                log.info("new access token: {}", accessToken);
-                log.info("refresh token: {}", refreshToken);
+
                 saveUserToken(user, accessToken);
                 return AuthenticationResponse.builder()
                         .accessToken(accessToken)

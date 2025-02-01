@@ -53,8 +53,7 @@ public class UserController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UserPostResponse> create(@RequestBody @Valid UserPostRequest userPostRequest) {
+    public ResponseEntity<UserPostResponse> saveUser(@RequestBody @Valid UserPostRequest userPostRequest) {
         var user = mapper.toUser(userPostRequest);
         user = userService.createUser(user);
         var response = mapper.toUserPostResponse(user);

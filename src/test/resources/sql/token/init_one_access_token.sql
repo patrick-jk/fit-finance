@@ -1,0 +1,1 @@
+INSERT INTO token (token, token_type, expired, revoked, user_id) VALUES ('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BmaXRmaW5hbmNlLmNvbSIsImlhdCI6MTQxOTE1Njc0NTAsImV4cCI6MTczODUxNjMyN30.jimoGvt72c_Qj6n8NYEZOVtFmUE7WNCP5To9NgrKBjM', 'BEARER', 0, 0, (SELECT id FROM user WHERE email = 'lucas@fitfinance.com'));
