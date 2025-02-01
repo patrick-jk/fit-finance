@@ -5,15 +5,17 @@ server:
     relaxed-query-chars: '|,{,},[,]'
 
 spring:
+  config:
+    import: optional:classpath:.env[.properties]
   sql:
     init:
       mode: always
   application:
     name: fit-finance-backend
   datasource:
-    url: jdbc:mysql://www.thyagoquintas.com.br:3306/engenharia_11
-    username: engenharia_11
-    password: cachalote
+    url: ${ENV_DB_URL:jdbc:mysql://mysql:3306/fit_finance?createDatabaseIfNotExist=true}
+    username: ${ENV_DB_USER:root}
+    password: ${ENV_DB_PASSWORD:root}
   jpa:
     hibernate:
       ddl-auto: update

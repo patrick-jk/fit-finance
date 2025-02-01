@@ -65,13 +65,17 @@ class FinanceControllerIT {
     void setUpRegularUser() {
         var user = userUtils.createValidUser();
 
-        ResponseEntity<UserGetResponse> registerResponse = restTemplate.postForEntity("api/v1/auth/register", user, UserGetResponse.class);
-        authenticatedRegularUserId = Objects.requireNonNull(registerResponse.getBody()).getId();
-        var response = restTemplate.postForEntity("api/v1/auth/authenticate", user, AuthenticationResponse.class);
+        String jwtToken = jwtService.generateToken(user);
+        User savedUser = userRepository.save(user);
+
+        var token = tokenUtils.createValidToken(jwtToken, savedUser);
+        Token savedToken = tokenRepository.save(token);
+
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setBearerAuth(Objects.requireNonNull(response.getBody()).getAccessToken());
+        httpHeaders.setBearerAuth(savedToken.getTokenString());
 
         regularUserHeader = new HttpEntity<>(httpHeaders);
+        authenticatedRegularUserId = savedUser.getId();
     }
 
     @BeforeEach

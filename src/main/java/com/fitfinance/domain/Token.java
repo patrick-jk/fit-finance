@@ -1,7 +1,20 @@
 package com.fitfinance.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -12,23 +25,24 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 public class Token {
-    @EqualsAndHashCode.Include
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    @Column(unique = true, name = "token")
-    private String tokenString;
+  @EqualsAndHashCode.Include
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @Enumerated(EnumType.STRING)
-    public TokenType tokenType = TokenType.BEARER;
+  @Column(unique = true, name = "token")
+  private String tokenString;
 
-    private boolean revoked;
+  @Enumerated(EnumType.STRING)
+  public TokenType tokenType = TokenType.BEARER;
 
-    private boolean expired;
+  private boolean revoked;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @ToString.Exclude
-    private User user;
+  private boolean expired;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  @ToString.Exclude
+  private User user;
 }

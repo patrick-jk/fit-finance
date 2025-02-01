@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: mysql:9.0.1
+    container_name: fit_finance_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - fit-finance_data:/var/lib/mysql
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: fit_finance_prometheus
+    volumes:
+      - "./src/main/resources/prometheus.yml:/etc/prometheus.yml"
+    command: "--config.file=/etc/prometheus.yml"
+    ports:
+      - "9090:9090"
+
+#  fit-finance-backend:
+#    image: patrickviolin/fit-finance-backend:latest
+#    container_name: fit-finance-backend
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: ${ENV_DB_URL:jdbc:mysql://mysql:3306/fit_finance?createDatabaseIfNotExist=true}
+#      SPRING_DATASOURCE_USERNAME: ${ENV_DB_USER:root}
+#      SPRING_DATASOURCE_PASSWORD: ${ENV_DB_PASSWORD:root}
+#    depends_on:
+#      - mysql
+#
+#  fit-finance-frontend:
+#    image: patrickviolin/fit-finance-frontend:latest
+#    container_name: fit-finance-frontend
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - fit-finance-backend
+
+volumes:
+  fit-finance_data:
