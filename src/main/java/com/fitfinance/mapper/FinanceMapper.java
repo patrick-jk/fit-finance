@@ -14,8 +14,9 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE,
-uses = EnumConverterMapper.class)
+        uses = EnumConverterMapper.class)
 public interface FinanceMapper {
+
     @Mapping(source = "type", target = "type")
     Finance toFinance(FinancePostRequest request);
 

@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FitFinanceUserDetailsService implements UserDetailsService {
 
-  private final UserRepository repository;
+    private final UserRepository repository;
 
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    return repository.findByEmail(email)
-        .orElseThrow(() -> new UsernameNotFoundException("Username not found for email: " + email));
-  }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found for email: " + email));
+    }
 }

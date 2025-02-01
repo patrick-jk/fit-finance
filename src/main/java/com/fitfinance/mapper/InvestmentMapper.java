@@ -14,8 +14,9 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE,
-uses = EnumConverterMapper.class)
+        uses = EnumConverterMapper.class)
 public interface InvestmentMapper {
+
     Investment toInvestment(InvestmentPostRequest request);
 
     @Mapping(source = "id", target = "id")

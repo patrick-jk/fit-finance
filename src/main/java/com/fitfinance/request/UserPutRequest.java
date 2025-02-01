@@ -13,6 +13,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class UserPutRequest {
+
     @NotNull
     private Long id;
     @NotBlank(message = "The field 'name' is required")

@@ -10,8 +10,8 @@ import lombok.ToString;
 @ToString
 public class FinanceUserGetResponse {
 
-  @Schema(description = "User's id", example = "0001")
-  private Long id;
-  @Schema(description = "User's income", example = "1500.00")
-  private double income;
+    @Schema(description = "User's id", example = "0001")
+    private Long id;
+    @Schema(description = "User's income", example = "1500.00")
+    private double income;
 }

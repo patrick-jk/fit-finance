@@ -1,8 +1,6 @@
 package com.fitfinance.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fitfinance.domain.FinanceType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class FinancePostResponse {
+
     @Schema(description = "Finance's ID", example = "1")
     private Long id;
     @Schema(description = "Finance's name", example = "Salary")

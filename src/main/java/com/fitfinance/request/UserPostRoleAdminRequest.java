@@ -13,6 +13,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class UserPostRoleAdminRequest {
+
     @NotBlank(message = "The field 'name' is required")
     @Schema(description = "User's name", example = "Menor Oakley")
     private String name;

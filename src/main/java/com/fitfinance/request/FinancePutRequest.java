@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Builder
 @ToString
 public class FinancePutRequest {
+
     @NotNull
     private Long id;
     @NotBlank(message = "The field 'name' is required")

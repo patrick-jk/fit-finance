@@ -13,17 +13,16 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.function.Function;
 
 @Service
 public class JwtService {
 
-    @Value("${application.security.jwt.secret-key}")
+    @Value("${jwt.secret-key}")
     private String secretKey;
-    @Value("${application.security.jwt.expiration}")
+    @Value("${jwt-config.token-expiration}")
     private long jwtExpiration;
-    @Value("${application.security.jwt.refresh-token.expiration}")
+    @Value("${jwt-config.refresh-token-expiration}")
     private long refreshExpiration;
 
     public String extractUsername(String token) {
@@ -49,7 +48,7 @@ public class JwtService {
 
     private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(
-                new Date(System.nanoTime())).setExpiration(new Date(System.currentTimeMillis() + expiration))
+                        new Date(System.nanoTime())).setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

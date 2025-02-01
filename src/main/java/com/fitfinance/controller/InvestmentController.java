@@ -10,7 +10,6 @@ import com.fitfinance.response.InvestmentPostResponse;
 import com.fitfinance.response.InvestmentSummaryResponse;
 import com.fitfinance.service.InvestmentService;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -18,14 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Log4j2
 @RestController
@@ -33,84 +27,84 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class InvestmentController {
 
-  private final InvestmentService investmentService;
-  private final InvestmentMapper mapper;
+    private final InvestmentService investmentService;
+    private final InvestmentMapper mapper;
 
-  @GetMapping
-  @PreAuthorize("hasAuthority('ADMIN')")
-  public ResponseEntity<List<InvestmentGetResponse>> findAll() {
-    List<Investment> allInvestments = investmentService.getAllInvestments();
-    var investmentResponse = mapper.toInvestmentGetResponses(allInvestments);
-    return ResponseEntity.ok(investmentResponse);
-  }
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<List<InvestmentGetResponse>> findAll() {
+        List<Investment> allInvestments = investmentService.getAllInvestments();
+        var investmentResponse = mapper.toInvestmentGetResponses(allInvestments);
+        return ResponseEntity.ok(investmentResponse);
+    }
 
-  @GetMapping("/{id}")
-  @PreAuthorize("hasAuthority('ADMIN')")
-  public ResponseEntity<InvestmentGetResponse> findById(@PathVariable Long id) {
-    var investmentFound = investmentService.findById(id);
-    var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
-    return ResponseEntity.ok(investmentResponse);
-  }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<InvestmentGetResponse> findById(@PathVariable Long id) {
+        var investmentFound = investmentService.findById(id);
+        var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
+        return ResponseEntity.ok(investmentResponse);
+    }
 
-  @GetMapping("/by-user-id")
-  public ResponseEntity<List<InvestmentGetResponse>> findByUserId() {
-    var user = getUser();
-    var investmentFound = investmentService.findByUserId(user.getId());
+    @GetMapping("/by-user-id")
+    public ResponseEntity<List<InvestmentGetResponse>> findByUserId() {
+        var user = getUser();
+        var investmentFound = investmentService.findByUserId(user.getId());
 
-    var investmentsResponse = mapper.toInvestmentGetResponses(investmentFound);
-    return ResponseEntity.ok(investmentsResponse);
-  }
+        var investmentsResponse = mapper.toInvestmentGetResponses(investmentFound);
+        return ResponseEntity.ok(investmentsResponse);
+    }
 
-  @GetMapping("/biggest-investment")
-  public ResponseEntity<InvestmentGetResponse> getBiggestInvestment() {
-    var user = getUser();
-    var investmentFound = investmentService.getBiggestInvestment(user.getId());
-    var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
-    return ResponseEntity.ok(investmentResponse);
-  }
+    @GetMapping("/biggest-investment")
+    public ResponseEntity<InvestmentGetResponse> getBiggestInvestment() {
+        var user = getUser();
+        var investmentFound = investmentService.getBiggestInvestment(user.getId());
+        var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
+        return ResponseEntity.ok(investmentResponse);
+    }
 
-  @GetMapping("/smallest-investment")
-  public ResponseEntity<InvestmentGetResponse> getSmallestInvestment() {
-    var user = getUser();
-    var investmentFound = investmentService.getSmallestInvestment(user.getId());
-    var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
-    return ResponseEntity.ok(investmentResponse);
-  }
+    @GetMapping("/smallest-investment")
+    public ResponseEntity<InvestmentGetResponse> getSmallestInvestment() {
+        var user = getUser();
+        var investmentFound = investmentService.getSmallestInvestment(user.getId());
+        var investmentResponse = mapper.toInvestmentGetResponse(investmentFound);
+        return ResponseEntity.ok(investmentResponse);
+    }
 
-  @GetMapping("/total-summary")
-  public ResponseEntity<InvestmentSummaryResponse> getInvestmentSummary() {
-    var user = getUser();
-    var investmentSummaryResponse = investmentService.getInvestmentSummary(user.getId());
-    return ResponseEntity.ok(investmentSummaryResponse);
-  }
+    @GetMapping("/total-summary")
+    public ResponseEntity<InvestmentSummaryResponse> getInvestmentSummary() {
+        var user = getUser();
+        var investmentSummaryResponse = investmentService.getInvestmentSummary(user.getId());
+        return ResponseEntity.ok(investmentSummaryResponse);
+    }
 
-  @PostMapping
-  public ResponseEntity<InvestmentPostResponse> create(@RequestBody @Valid InvestmentPostRequest investmentPostRequest) {
-    var user = getUser();
-    var investment = mapper.toInvestment(investmentPostRequest);
-    investment.setUser(user);
-    Investment savedInvestment = investmentService.createInvestment(investment);
-    var response = mapper.toInvestmentPostResponse(savedInvestment);
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
-  }
+    @PostMapping
+    public ResponseEntity<InvestmentPostResponse> create(@RequestBody @Valid InvestmentPostRequest investmentPostRequest) {
+        var user = getUser();
+        var investment = mapper.toInvestment(investmentPostRequest);
+        investment.setUser(user);
+        Investment savedInvestment = investmentService.createInvestment(investment);
+        var response = mapper.toInvestmentPostResponse(savedInvestment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
-  @PutMapping
-  public ResponseEntity<Void> updateInvestment(@RequestBody @Valid InvestmentPutRequest investmentPutRequest) {
-    var user = getUser();
-    var investmentToUpdate = mapper.toInvestment(investmentPutRequest);
-    investmentToUpdate.setUser(user);
-    investmentService.updateInvestment(investmentToUpdate);
-    return ResponseEntity.noContent().build();
-  }
+    @PutMapping
+    public ResponseEntity<Void> updateInvestment(@RequestBody @Valid InvestmentPutRequest investmentPutRequest) {
+        var user = getUser();
+        var investmentToUpdate = mapper.toInvestment(investmentPutRequest);
+        investmentToUpdate.setUser(user);
+        investmentService.updateInvestment(investmentToUpdate);
+        return ResponseEntity.noContent().build();
+    }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteInvestment(@PathVariable Long id) {
-    investmentService.deleteInvestment(id, getUser());
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteInvestment(@PathVariable Long id) {
+        investmentService.deleteInvestment(id, getUser());
+        return ResponseEntity.noContent().build();
+    }
 
-  private static User getUser() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    return (User) authentication.getPrincipal();
-  }
+    private static User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
+    }
 }

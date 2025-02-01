@@ -11,20 +11,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EnumConverterMapper {
 
-  @FinanceEnumConverterMapping
-  public String convertFinanceTypeToString(FinanceType financeType) {
-    return switch (financeType) {
-      case INCOME -> "INCOME";
-      case EXPENSE -> "EXPENSE";
-    };
-  }
+    @FinanceEnumConverterMapping
+    public String convertFinanceTypeToString(FinanceType financeType) {
+        return switch (financeType) {
+            case INCOME -> "INCOME";
+            case EXPENSE -> "EXPENSE";
+        };
+    }
 
-  @InvestmentEnumConverterMapping
-  public String convertInvestmentTypeToString(InvestmentType investmentType) {
-    return switch (investmentType) {
-      case STOCK -> "STOCK";
-      case FII -> "FII";
-      case FIXED_INCOME -> "FIXED_INCOME";
-    };
-  }
+    @InvestmentEnumConverterMapping
+    public String convertInvestmentTypeToString(InvestmentType investmentType) {
+        return switch (investmentType) {
+            case STOCK -> "STOCK";
+            case FII -> "FII";
+            case FIXED_INCOME -> "FIXED_INCOME";
+        };
+    }
 }

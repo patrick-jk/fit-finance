@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
+
     @Schema(description = "User's name", example = "John Doe")
     private String name;
     @Schema(description = "User's CPF", example = "123.456.789-00")

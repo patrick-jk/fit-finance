@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @Builder
 @ToString
 public class FinancePostRequest {
+
     @NotBlank(message = "The field 'name' is required")
     @Schema(description = "Finance's name", example = "Cachaça")
     private String name;

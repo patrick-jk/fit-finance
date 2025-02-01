@@ -1,10 +1,11 @@
 package com.fitfinance.response;
 
-import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -12,10 +13,10 @@ import lombok.ToString;
 @ToString
 public class UserSummaryResponse {
 
-  private BigDecimal balance;
-  private BigDecimal totalExpenses;
-  private FinanceGetResponse biggestExpense;
-  private FinanceGetResponse smallestExpense;
-  private InvestmentGetResponse biggestInvestment;
-  private InvestmentGetResponse smallestInvestment;
+    private BigDecimal balance;
+    private BigDecimal totalExpenses;
+    private FinanceGetResponse biggestExpense;
+    private FinanceGetResponse smallestExpense;
+    private InvestmentGetResponse biggestInvestment;
+    private InvestmentGetResponse smallestInvestment;
 }
